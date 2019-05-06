@@ -1,4 +1,13 @@
 <div class="col-8">
+    <form>
+        <div class="form-group">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend"><i class="fa fa-search"></i></div>
+                <input type="text" class="form-control" placeholder="search in categories" ng-model="searchCategories">
+            </div>
+        </div>
+    </form>
+
     <table class="table table-striped">
         <thead>
             <tr>
@@ -9,7 +18,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="category in categories | orderBy: sortField:sortReverse">
+            <tr ng-repeat="category in categories | orderBy: sortField:sortReverse | filter: searchCategories">
                 <td ng-show="!edit[category.id]">{{category.name}}<span style="cursor:pointer; margin-left: 4%" class="float-right" data={{category.id}} ng-click="removeCategory(category.id)">x</span><span class="fa fa-edit float-right" data={{category.id}} ng-click="editCategory.name = category.name; edit[category.id] = true"></span></td>
                 <td ng-show="edit[category.id]"><input type="text" class="form-control" placeholder="Name" ng-model="editCategory.name"></td>
                 <td ng-show="edit[category.id]"><button class="btn btn-success" ng-click="updateCategory(category.id); edit[category.id] = false">Update</button></td><td ng-show="edit[category.id]"><button class="btn btn-danger" ng-click="edit[category.id] = false">Cancel</button></td>
